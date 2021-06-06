@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  vpnclient:
+    build:
+      context: ./vpn/build
+      dockerfile: Dockerfile
+    container_name: vpnclient
+    volumes:
+      - ./vpnclient/vpn_client.config:/usr/vpnclient/vpn_client.config
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    network_mode: "host"
+    privileged: true
+    tty: true
+    restart: always
+networks:
+  default:
